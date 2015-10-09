@@ -1,4 +1,4 @@
-import scalaz._
+package fp
 
 /**
  * Created by iurii.susuk on 05.10.2015.
@@ -10,4 +10,3 @@ object DDD extends App {
 
 
 }
-

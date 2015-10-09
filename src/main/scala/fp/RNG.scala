@@ -1,3 +1,5 @@
+package fp
+
 /**
  * Created by iurii.susuk on 07.10.2015.
  */
@@ -13,7 +15,7 @@ object RNG {
 
   val int: Rand[Int] = _.nextInt
 
-  def map[A,B](s: Rand[A])(f: A => B): Rand[B] =
+  def map[A, B](s: Rand[A])(f: A => B): Rand[B] =
     rng => {
       val (a, rng2) = s(rng)
       (f(a), rng2)
@@ -69,6 +71,16 @@ object RNG {
     }
 
     build(List.empty, rng)
+  }
+
+  def boolean(rng: RNG): (Boolean, RNG) =
+    rng.nextInt match {
+      case (i, rng2) => (i % 2 == 0, rng2)
+    }
+
+  def nonNegativeInt(rng: RNG): (Int, RNG) = {
+    val (i, r) = rng.nextInt
+    (if (i < 0) -(i + 1) else i, r)
   }
 
 }

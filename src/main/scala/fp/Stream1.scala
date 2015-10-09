@@ -1,15 +1,8 @@
-trait Stream1[+A] {
-  def uncons: Option[(A, Stream1[A])]
+package fp
 
-  def isEmpty: Boolean = uncons.isEmpty
-
-  def toList: List[A]
-
-//  def take(n: Int): Stream1[A]
-
-  // def takeWhile(p: A => Boolean): Stream[A]
-}
-
+/**
+ * Created by iurii.susuk on 09.10.2015.
+ */
 object Stream1 {
 
   def empty[A]: Stream1[A] =
@@ -37,4 +30,16 @@ object Stream1 {
   def apply[A](as: A*): Stream1[A] =
     if (as.isEmpty) empty
     else cons(as.head, apply(as.tail: _*))
+}
+
+trait Stream1[+A] {
+  def uncons: Option[(A, Stream1[A])]
+
+  def isEmpty: Boolean = uncons.isEmpty
+
+  def toList: List[A]
+
+//  def take(n: Int): Stream1[A]
+
+  // def takeWhile(p: A => Boolean): Stream[A]
 }

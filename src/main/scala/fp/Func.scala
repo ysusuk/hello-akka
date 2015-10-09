@@ -1,3 +1,5 @@
+package fp
+
 /**
  * Created by iurii.susuk on 06.10.2015.
  */
@@ -14,4 +16,3 @@ object Func extends App {
   println(if2[String](emptyInput.isEmpty, sys.error("empty input - on empty"), emptyInput))
 
 }
-
