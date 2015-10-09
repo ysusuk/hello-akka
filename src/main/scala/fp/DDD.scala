@@ -6,7 +6,7 @@ package fp
 
 object DDD extends App {
 
-  type ValidationStatus[S] = \/[String, S]
+  //type ValidationStatus[S] = \/[String, S]
 
 
 }

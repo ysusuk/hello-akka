@@ -1,3 +1,5 @@
+package fp
+
 import org.scalatest.Matchers._
 import org.scalatest._
 

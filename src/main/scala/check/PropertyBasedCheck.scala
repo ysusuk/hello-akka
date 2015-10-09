@@ -6,7 +6,7 @@ import fp._
 /**
  * Created by iurii.susuk on 09.10.2015.
  */
-case class Gen[+A](sample: State[RNG, A], exhaustive: Stream1[A])
+case class Gen[+A](sample: State[RNG, A], exhaustive: Stream1[Option[A]])
 
 object Gen {
   def unit[A](a: => A): Gen[A] = new Gen(State.unit(a), Stream1.empty)
@@ -16,10 +16,16 @@ object Gen {
   def choose(start: Int, stopExclusive: Int): Gen[Int] = Gen(State(RNG.nonNegativeInt), Stream1.empty[Int])
 
   /** Between 0 and 1, not including 1. */
-  def uniform: Gen[Double] = ???
+  val uniform: Gen[Double] = Gen(State(RNG.double), unbounded)
 
   /** Between `i` and `j`, not including `j`. */
   def choose(i: Double, j: Double): Gen[Double] = ???
+
+  type Domain[+A] = Stream[Option[A]]
+
+  def bounded[A](a: Stream[A]): Domain[A] = a map (Some(_))
+
+  def unbounded: Domain[Nothing] = Stream(None)
 }
 
 object Prop {
