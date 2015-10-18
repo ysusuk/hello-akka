@@ -11,12 +11,12 @@ case class Gen[+A](sample: State[RNG, A], exhaustive: Stream1[Option[A]])
 object Gen {
   def unit[A](a: => A): Gen[A] = new Gen(State.unit(a), Stream1.empty)
 
-  def boolean: Gen[Boolean] = Gen(State(RNG.boolean), Stream1.empty[Boolean])
+  def boolean: Gen[Boolean] = Gen(State(RNG.boolean), Stream1.empty[Option[Boolean]])
 
-  def choose(start: Int, stopExclusive: Int): Gen[Int] = Gen(State(RNG.nonNegativeInt), Stream1.empty[Int])
+  def choose(start: Int, stopExclusive: Int): Gen[Int] = Gen(State(RNG.nonNegativeInt), Stream1.empty[Option[Int]])
 
   /** Between 0 and 1, not including 1. */
-  val uniform: Gen[Double] = Gen(State(RNG.double), unbounded)
+  val uniform: Gen[Double] = Gen(State(RNG.double), Stream1.empty[Option[Double]])
 
   /** Between `i` and `j`, not including `j`. */
   def choose(i: Double, j: Double): Gen[Double] = ???

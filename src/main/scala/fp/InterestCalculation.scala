@@ -7,28 +7,29 @@ package object interest {
   type Amount = BigDecimal
 
   case class Balance(amount: Amount = 0)
-}
-
-import fp.interest._
-
-
-object InterestCalculation extends App {
 
 }
+
+import fp.interest.{Amount, Balance}
 
 sealed trait TaxType
+
 case object Tax extends TaxType
+
 case object Fee extends TaxType
+
 case object Commission extends TaxType
 
 sealed trait TransactionType
+
 case object InterestComputation extends TransactionType
+
 case object Dividend extends TransactionType
 
 trait TaxCalculationTable {
   type T <: TransactionType
   val transactionType: T
-  ￼￼￼￼￼￼￼￼￼￼￼￼￼
+
   def getTaxRates: Map[TaxType, Amount] = {
     val taxTable = Map.empty[TaxType, Amount]
     taxTable
